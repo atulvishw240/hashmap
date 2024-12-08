@@ -187,35 +187,5 @@ class HashMap
         end
       end
     end
-    # self.capacity = capacity * 2
-    # array = Array.new(capacity)
-
-    # buckets.each do |object|
-    #   next if object.nil?
-
-    #   if object.is_a?(Node)
-    #     code = hash(object.key)
-    #     size = array.length
-    #     index = code % size
-
-    #     array[index] = object
-    #   elsif object.is_a?(LinkedList)
-    #     first = object.head
-    #     second = first.next
-
-    #     until second.nil?
-    #       code = hash(second.key)
-    #       size = array.length
-    #       index = code % size
-
-    #       array[index] = second
-
-    #       first = first.next
-    #       second = first.next
-    #     end
-    #   end
-    # end
-
-    # self.buckets = array
   end
 end
