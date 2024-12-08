@@ -57,4 +57,19 @@ class HashMap
       buckets[index] = nil if object.key == key
     end
   end
+
+  def length
+    count = 0
+    buckets.each do |object|
+      count += 1 unless object.nil?
+    end
+
+    count
+  end
+
+  def clear
+    buckets.each_index do |index|
+      buckets[index] = nil
+    end
+  end
 end
