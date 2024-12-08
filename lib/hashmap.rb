@@ -43,10 +43,18 @@ class HashMap
     buckets.each do |element|
       node = element
       next if node.nil?
-      
+
       return true if node.key == key
     end
 
     false
+  end
+
+  def remove(key)
+    buckets.each_with_index do |object, index|
+      next if object.nil?
+
+      buckets[index] = nil if object.key == key
+    end
   end
 end

@@ -19,3 +19,6 @@ puts hash.has?('aditya')
 puts hash.has?('anurag')
 puts hash.has?('anuj')
 puts hash.has?('himanshu')
+
+hash.remove('aditya')
+p hash.buckets
