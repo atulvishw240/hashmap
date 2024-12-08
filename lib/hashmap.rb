@@ -94,4 +94,19 @@ class HashMap
     
     array
   end
+
+  def entries
+    array = []
+    buckets.each do |object|
+      pair = []
+      next if object.nil?
+
+      pair << object.key
+      pair << object.value
+
+      array << pair
+    end
+
+    array
+  end
 end

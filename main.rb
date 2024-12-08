@@ -26,4 +26,4 @@ p hash.buckets
 
 puts hash.length
 
-p hash.keys
+p hash.entries
