@@ -38,4 +38,15 @@ class HashMap
 
     return node.value if node.key == key
   end
+
+  def has?(key)
+    buckets.each do |element|
+      node = element
+      next if node.nil?
+      
+      return true if node.key == key
+    end
+
+    false
+  end
 end

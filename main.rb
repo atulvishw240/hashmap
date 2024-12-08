@@ -13,3 +13,9 @@ puts hash.get('anurag')
 puts hash.get('anuj')
 puts hash.get('atul')
 p hash.get('himanshu')
+
+puts ""
+puts hash.has?('aditya')
+puts hash.has?('anurag')
+puts hash.has?('anuj')
+puts hash.has?('himanshu')
