@@ -1,3 +1,5 @@
+require_relative "node"
+
 # Implementation of hashes
 class HashMap
   attr_accessor :buckets, :capacity, :load_factor
@@ -15,5 +17,14 @@ class HashMap
     key.each_char { |char| hash_code = hash_code * prime_number + char.ord }
 
     hash_code
+  end
+
+  def set(key, value)
+    node = Node.new(key, value)
+    code = hash(key)
+    size = buckets.length
+    index = code % size
+
+    buckets[index] = node
   end
 end
