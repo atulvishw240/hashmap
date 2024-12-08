@@ -26,5 +26,4 @@ p hash.buckets
 
 puts hash.length
 
-hash.clear
-puts hash.length
+p hash.keys

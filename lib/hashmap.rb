@@ -72,4 +72,15 @@ class HashMap
       buckets[index] = nil
     end
   end
+
+  def keys
+    array = []
+    buckets.each do |object|
+      next if object.nil?
+
+      array << object.key 
+    end
+
+    array
+  end
 end
