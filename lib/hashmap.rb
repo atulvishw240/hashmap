@@ -1,13 +1,14 @@
 require_relative "node"
+require_relative "linkedlist"
 
 # Implementation of hashes
 class HashMap
-  attr_accessor :buckets, :capacity, :load_factor
+  attr_accessor :buckets, :capacity, :factor
 
   def initialize
     @capacity = 16
     @buckets = Array.new(@capacity)
-    @load_factor = 0.75
+    @factor = 0.75
   end
 
   def hash(key)
@@ -20,10 +21,27 @@ class HashMap
   end
 
   def set(key, value)
+    load_factor = capacity * factor
+    if length > load_factor
+      growth_functionality
+    end
+
     node = Node.new(key, value)
     code = hash(key)
     size = buckets.length
     index = code % size
+
+    if buckets[index].is_a?(Node)
+      # LinkedList
+      list = LinkedList.new
+      list.add(buckets[index])
+      list.add(node)
+
+      buckets[index] = list
+      return
+    elsif buckets[index].is_a?(LinkedList)
+      buckets[index].add(node)
+    end
 
     buckets[index] = node
   end
@@ -61,7 +79,9 @@ class HashMap
   def length
     count = 0
     buckets.each do |object|
-      count += 1 unless object.nil?
+      count += 1 if object.is_a?(Node)
+
+      count += object.size if object.is_a?(LinkedList)
     end
 
     count
@@ -78,7 +98,18 @@ class HashMap
     buckets.each do |object|
       next if object.nil?
 
-      array << object.key 
+      array << object.key if object.is_a?(Node)
+
+      if object.is_a?(LinkedList)
+        first = object.head
+        second = first.next
+
+        until second.nil?
+          array << second.key
+          first = first.next
+          second = first.next
+        end
+      end
     end
 
     array
@@ -89,7 +120,18 @@ class HashMap
     buckets.each do |object|
       next if object.nil?
 
-      array << object.value
+      array << object.value if object.is_a?(Node)
+
+      if object.is_a?(LinkedList)
+        first = object.head
+        second = first.next
+
+        until second.nil?
+          array << second.value
+          first = first.next
+          second = first.next
+        end
+      end
     end
     
     array
@@ -101,12 +143,79 @@ class HashMap
       pair = []
       next if object.nil?
 
-      pair << object.key
-      pair << object.value
+      if object.is_a?(Node)
+        pair << object.key
+        pair << object.value
+        array << pair
+      elsif object.is_a?(LinkedList)
+        first = object.head
+        second = first.next
 
-      array << pair
+        until second.nil?
+          arr = []
+          arr << second.key
+          arr << second.value
+          array << arr
+
+          first = first.next
+          second = second.next
+        end
+      end
     end
 
     array
+  end
+
+  def growth_functionality
+    self.capacity = capacity * 2
+    array = buckets
+    self.buckets = Array.new(capacity)
+
+    array.each do |object|
+      # Call set method for each node
+      if object.is_a?(Node)
+        set(object.key, object.value)
+      elsif object.is_a?(LinkedList)
+        first = object.head
+        second = first.next
+
+        until second.nil?
+          set(second.key, second.value)
+
+          first = first.next
+          second = first.next
+        end
+      end
+    end
+    # self.capacity = capacity * 2
+    # array = Array.new(capacity)
+
+    # buckets.each do |object|
+    #   next if object.nil?
+
+    #   if object.is_a?(Node)
+    #     code = hash(object.key)
+    #     size = array.length
+    #     index = code % size
+
+    #     array[index] = object
+    #   elsif object.is_a?(LinkedList)
+    #     first = object.head
+    #     second = first.next
+
+    #     until second.nil?
+    #       code = hash(second.key)
+    #       size = array.length
+    #       index = code % size
+
+    #       array[index] = second
+
+    #       first = first.next
+    #       second = first.next
+    #     end
+    #   end
+    # end
+
+    # self.buckets = array
   end
 end

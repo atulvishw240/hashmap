@@ -1,29 +1,30 @@
 require_relative "lib/hashmap"
 
-hash = HashMap.new
-hash.set('atul', 'vishwakarma')
-hash.set('aditya', 'shukla')
-hash.set('anurag', 'verma')
-hash.set('anuj', 'bamne')
+test = HashMap.new
 
-p hash.buckets
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
 
-puts hash.get('aditya')
-puts hash.get('anurag')
-puts hash.get('anuj')
-puts hash.get('atul')
-puts hash.length
-p hash.get('himanshu')
+puts test.capacity
+puts test.length
+p test.keys.size
 
-puts ""
-puts hash.has?('aditya')
-puts hash.has?('anurag')
-puts hash.has?('anuj')
-puts hash.has?('himanshu')
+test.set('moon', 'silver')
+p test.capacity
+p test.length
+p test.keys.size
 
-hash.remove('aditya')
-p hash.buckets
-
-puts hash.length
-
-p hash.entries
+test.set('guavava', 'red')
+puts test.capacity
+puts test.length
+p test.keys.size

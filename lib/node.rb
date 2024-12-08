@@ -1,9 +1,9 @@
 class Node
-  attr_accessor :key, :value, :address
+  attr_accessor :key, :value, :next
 
   def initialize(key = nil, value = nil, address = nil)
     @key = key
     @value = value
-    @address = address
+    @next = address
   end
 end
