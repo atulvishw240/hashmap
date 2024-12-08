@@ -83,4 +83,15 @@ class HashMap
 
     array
   end
+
+  def values
+    array = []
+    buckets.each do |object|
+      next if object.nil?
+
+      array << object.value
+    end
+    
+    array
+  end
 end
