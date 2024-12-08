@@ -10,7 +10,7 @@ class LinkedList
   def add(node)
     first = head
     second = head.next
-    
+
     until second.nil?
       first = first.next
       second = second.next

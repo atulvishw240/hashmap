@@ -1,5 +1,5 @@
-require_relative "node"
-require_relative "linkedlist"
+require_relative 'node'
+require_relative 'linkedlist'
 
 # Implementation of hashes
 class HashMap
@@ -22,9 +22,7 @@ class HashMap
 
   def set(key, value)
     load_factor = capacity * factor
-    if length > load_factor
-      growth_functionality
-    end
+    growth_functionality if length > load_factor
 
     node = Node.new(key, value)
     code = hash(key)
@@ -32,7 +30,6 @@ class HashMap
     index = code % size
 
     if buckets[index].is_a?(Node)
-      # LinkedList
       list = LinkedList.new
       list.add(buckets[index])
       list.add(node)
@@ -54,7 +51,7 @@ class HashMap
 
     return nil if node.nil?
 
-    return node.value if node.key == key
+    node.value if node.key == key
   end
 
   def has?(key)
@@ -133,7 +130,7 @@ class HashMap
         end
       end
     end
-    
+
     array
   end
 

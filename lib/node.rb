@@ -1,3 +1,4 @@
+# Node Abstract Data Type
 class Node
   attr_accessor :key, :value, :next
 
