@@ -27,4 +27,15 @@ class HashMap
 
     buckets[index] = node
   end
+
+  def get(key)
+    code = hash(key)
+    size = buckets.length
+    index = code % size
+    node = buckets[index]
+
+    return nil if node.nil?
+
+    return node.value if node.key == key
+  end
 end
