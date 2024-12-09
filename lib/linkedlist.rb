@@ -19,6 +19,21 @@ class LinkedList
     first.next = node
   end
 
+  def remove(key)
+    first = head
+    second = first.next
+
+    until second.nil?
+      if second.key == key
+        first.next = second.next
+        break
+      end
+
+      first = first.next
+      second = first.next
+    end
+  end
+
   def size
     count = 0
     first = head
@@ -32,5 +47,19 @@ class LinkedList
     end
 
     count
+  end
+
+  def contains?(key)
+    first = head
+    second = first.next
+
+    until second.nil?
+      return true if second.key == key
+
+      first = first.next
+      second = first.next
+    end
+
+    false
   end
 end

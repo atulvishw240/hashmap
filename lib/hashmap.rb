@@ -30,6 +30,10 @@ class HashMap
     index = code % size
 
     if buckets[index].is_a?(Node)
+      if buckets[index].key == key
+        buckets[index] = node
+        return
+      end
       list = LinkedList.new
       list.add(buckets[index])
       list.add(node)
@@ -70,10 +74,22 @@ class HashMap
 
   def has?(key)
     buckets.each do |element|
-      node = element
-      next if node.nil?
+      object = element
+      next if object.nil?
 
-      return true if node.key == key
+      return true if object.is_a?(Node) && object.key == key
+
+      if object.is_a?(LinkedList)
+        first = object.head
+        second = first.next
+
+        until second.nil?
+          return true if second.key == key
+
+          first = first.next
+          second = first.next
+        end
+      end
     end
 
     false
@@ -83,7 +99,14 @@ class HashMap
     buckets.each_with_index do |object, index|
       next if object.nil?
 
-      buckets[index] = nil if object.key == key
+      if object.is_a?(Node) && object.key == key
+        self.buckets[index] = nil
+        return
+      end
+
+      if object.is_a?(LinkedList)
+        object.remove(key)
+      end
     end
   end
 
