@@ -17,7 +17,19 @@ test.set('lion', 'golden')
 
 puts test.capacity
 puts test.length
-p test.keys.size
+puts test.get('dog')
+puts test.get('grape')
+puts test.get('hat')
+puts test.get('ice cream')
+puts test.get('lion')
+puts test.has?('lion')
+puts test.has?('sikander')
+puts test.remove('lion')
+p test.keys
+p test.values
+p test.entries
+test.clear
+
 
 test.set('moon', 'silver')
 p test.capacity

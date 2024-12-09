@@ -47,11 +47,25 @@ class HashMap
     code = hash(key)
     size = buckets.length
     index = code % size
-    node = buckets[index]
+    object = buckets[index]
 
-    return nil if node.nil?
+    return nil if object.nil?
 
-    node.value if node.key == key
+    return object.value if object.is_a?(Node) && object.key == key
+
+    if object.is_a?(LinkedList)
+      first = object.head
+      second = first.next
+
+      until second.nil?
+        return second.value if second.key == key
+
+        first = first.next
+        second = first.next
+      end
+
+      return nil
+    end
   end
 
   def has?(key)
@@ -162,6 +176,8 @@ class HashMap
 
     array
   end
+
+  private
 
   def growth_functionality
     self.capacity = capacity * 2
